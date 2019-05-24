@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON query API</title>
+</head>
+<body>
+<h1>Welcome to my JSON query REST API</h1>
+<p>The API originally works on the format of <a href="http://jsonvat.com/">http://jsonvat.com/</a>, but can be extended to accommodate other formats.</p>
+<p>The table below gives parameters and their descriptions. Possible values are given in tables below.</p>
+<p>Query adress is http://localhost:8080/query.</p>
+
+<table>
+    <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>s</td>
+        <td>Source of the jason to query, default value is 0</td>
+    </tr>
+    <tr>
+        <td>f</td>
+        <td>Specify function for filtering</td>
+    </tr>
+    <tr>
+        <td>p</td>
+        <td>Parameters to the filter function</td>
+    </tr>
+</table>
+
+<br/>
+<p>Source location table</p>
+<table>
+    <tr>
+        <th>Value of s</th>
+        <th>Meaning</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td><a href="http://jsonvat.com/">http://jsonvat.com/</a></td>
+    </tr>
+</table>
+
+<br/>
+<p>Filter function table</p>
+<table>
+    <tr>
+        <th>Value of f</th>
+        <th>Meaning</th>
+    </tr>
+    <tr>
+        <td>lv</td>
+        <td>Given parameter p, returns p countries with lowest VAT rates, default is p=3</td>
+    </tr>
+    <tr>
+        <td>hv</td>
+        <td>Given parameter p, returns p countries with highest VAT rates, default is p=3</td>
+    </tr>
+</table>
+<br/>
+
+<p>Output is in the format JSON {"status":status, "result":resultJSON}, where status is either "success" or "error".</p>
+
+<br/>
+<h3>Example outputs</h3>
+<table>
+    <tr>
+        <th>Query</th>
+        <th>Result</th>
+    </tr>
+    <tr>
+        <td><a href="http://localhost:8080/query?f=hv">http://localhost:8080/query?f=hv </a> </td>
+        <td>{"status":"success","result":["Sweden","Denmark","Hungary"]}</td>
+    </tr>
+    <tr>
+        <td><a  href="http://localhost:8080/query?f=lv">http://localhost:8080/query?f=lv </a> </td>
+        <td>{"status":"success","result":["Cyprus","Luxembourg","Malta"]}</td>
+    </tr>
+    <tr>
+        <td><a href="http://localhost:8080/query?f=lv&p=1">http://localhost:8080/query?f=lv&p=1 </a> </td>
+        <td>{"status":"success","result":["Luxembourg"]}</td>
+    </tr>
+    <tr>
+        <td><a href="http://localhost:8080/query?f=lv&p=6">http://localhost:8080/query?f=lv&p=6 </a> </td>
+        <td>{"status":"success","result":["Cyprus","Germany","Luxembourg","Romania","Malta","United Kingdom"]}</td>
+    </tr>
+</table>
+
+
+</body>
+</html>
